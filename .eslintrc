@@ -1,0 +1,58 @@
+{
+  "rules": {
+
+    //EcmaScript rules
+    "strict": [2, "global"], //IMPORTANT controls location of Use Strict Directives. But not mandatory because it's managed by browserify
+    "no-console":2, //IMPORTANT disallow use of console
+    "no-unused-vars":2,//WARNING disallow declaration of variables that are not used in the code
+    "no-reserved-keys": 2,//IMPORTANT - disallow reserved words being used as object literal keys (off by default)
+    "no-undef":2,//WARNING disallow use of undeclared variables unless mentioned in a /*global */ block
+    "camelcase":1,//WARNING when you do not put camelcase on your code
+    "no-multi-spaces":1,//WARNING disallow use of multiple spaces
+    "valid-jsdoc":1,//WARNING Ensure JSDoc comments are valid
+    "no-underscore-dangle": 0, //WARNING disallow dangling underscores in identifiers
+    "no-extra-parens": 0,//WARNING disallow unnecessary parentheses
+    "quotes":0,//NOT specify whether double or single quotes should be used
+    "comma-spacing":0, //NOT enforce spacing before and after comma
+    "space-infix-ops":0, //NOT  require spaces around operators
+    "key-spacing":0, //NOT enforces spacing between keys and values in object literal properties
+    "eol-last":0, //NOT enforce newline at the end of file, with no multiple empty lines
+
+    //react rules
+    "react/no-multi-comp": 2,//IMPORTANT Prevent multiple component definition per file
+    "react/prop-types": 2,//IMPORTANT Prevent missing props validation in a React component definition
+    "react/display-name": 1,//WARNING missing displayName in a React component definition
+    "react/self-closing-comp": 1,//WARNING Prevent extra closing tags for components without children
+    "react/wrap-multilines": 0,//NOT Prevent missing parentheses around multilines JSX
+    "react/no-did-mount-set-state": 2,
+    "react/no-did-update-set-state": 2,
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2,
+    "react/react-in-jsx-scope": 0 //NOT Prevent missing React when using JSX
+  },
+  "globals": {
+    "describe": true,
+    "xdescribe": true,
+    "it": true,
+    "xit": true,
+    "expect": true,
+    "beforeEach": true,
+    "afterEach": true,
+    "jest": true
+  },
+  "env":{
+    "node": true, //node environment to authorize module and require
+    "browser": true //browser environment to authorize document and window keywords
+  },
+  "plugins": [
+    "react"
+  ],
+  "ecmaFeatures": {
+    "jsx": true,//enabled jsx
+    "objectLiteralShorthandMethods":true, //enable object literal shorthand methods
+    "modules":false,// enable modules and global strict mode
+    "classes":true, //enable classes class keyword
+    "arrowFunctions":true //enable arrowFunctions =>
+  }
+
+}
