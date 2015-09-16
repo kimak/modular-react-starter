@@ -1,15 +1,12 @@
-'use strict';
-
-import gulp from 'gulp';
-import _ from 'lodash';
-import gutil from 'gulp-util';
+import gulp         from 'gulp';
+import _            from 'lodash';
+import gutil        from 'gulp-util';
 import handleErrors from '../utils/handleErrors';
-import inject from 'gulp-inject';
-import print from 'gulp-print';
-import path from 'path';
-
-import basePaths from '../config/basePaths';
-import config from '../config/config';
+import inject       from 'gulp-inject';
+import print        from 'gulp-print';
+import path         from 'path';
+import basePaths    from '../config/basePaths';
+import config       from '../config/config';
 
 
 function getIndexTasks() {
@@ -20,6 +17,7 @@ function getIndexTasks() {
 
     if (!item.index) {
       gutil.log(gutil.colors.yellow('--Skipping index task for: ' + key));
+
       return;
     }
 
@@ -28,7 +26,6 @@ function getIndexTasks() {
 
       gutil.log(gutil.colors.green('Launch index task for: ' + taskName));
 
-
       if (item.styles && item.styles.dest) {
         sources.push(path.resolve(item.styles.dest + '/**/*.css'));
       }
@@ -36,12 +33,13 @@ function getIndexTasks() {
       if (config.dependencies && config.dependencies.dest) {
         sources.push(path.resolve(config.dependencies.dest + '/vendors.js'));
       }
+
       if (item.scripts && item.scripts.dest) {
         sources.push(path.resolve(item.scripts.dest + '/**/*.js'));
       }
 
       gulp.watch(item.index, () =>{
-          gulp.start(['index:' + key]);
+        gulp.start(['index:' + key]);
       });
 
       var src = gulp.src(sources, {
@@ -56,18 +54,12 @@ function getIndexTasks() {
         .pipe(print())
         .pipe(inject(src))
         .pipe(gulp.dest(item.dest));
-
     });
 
     tasks.push(taskName);
-
-
-
   });
 
   return tasks;
-
-
 }
 
 gulp.task('index', getIndexTasks());

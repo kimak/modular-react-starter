@@ -1,20 +1,17 @@
-'use strict';
-
-import gulp from 'gulp';
-import browserify from 'browserify';
-import babelify from 'babelify';
-import source from 'vinyl-source-stream';
-import buffer from 'vinyl-buffer';
-import uglify from 'gulp-uglify';
-import _ from 'lodash';
-import gutil from 'gulp-util';
-import print from 'gulp-print';
-import rename from 'gulp-rename';
-import sourcemaps from 'gulp-sourcemaps';
-import gulpif from 'gulp-if';
-
+import gulp         from 'gulp';
+import browserify   from 'browserify';
+import babelify     from 'babelify';
+import source       from 'vinyl-source-stream';
+import buffer       from 'vinyl-buffer';
+import uglify       from 'gulp-uglify';
+import _            from 'lodash';
+import gutil        from 'gulp-util';
+import print        from 'gulp-print';
+import rename       from 'gulp-rename';
+import sourcemaps   from 'gulp-sourcemaps';
+import gulpif       from 'gulp-if';
 import handleErrors from '../utils/handleErrors';
-import config from '../config/config';
+import config       from '../config/config';
 
 
 gulp.task(('bundleVendor'),  () => {
@@ -33,12 +30,10 @@ gulp.task(('bundleVendor'),  () => {
     .pipe(gulpif(!isDev, uglify()))
     .pipe(sourcemaps.write('./')) // writes .map file
     .pipe(gulp.dest(config.dependencies.dest));
-
 });
 
 
 function getBundler(files, isWatched) {
-
   var bundler = browserify(files, {
     extensions: ['.js', '.jsx'],
     cache: {},  // for watchify
@@ -56,6 +51,7 @@ function getBundler(files, isWatched) {
 
 function applyBundler(bundler, item, key) {
   var isDev = process.env.NODE_ENV === 'dev';
+
   return bundler.bundle()
     .on('error', handleErrors)
     .pipe(source(key + ".js")) // create filename
@@ -78,11 +74,11 @@ function getBundleTasks() {
 
     if (!item.scripts || !item.scripts.index) {
       gutil.log(gutil.colors.yellow('--Skipping bundle task for: ' + key));
+
       return;
     }
 
     gulp.task(taskName,  () => {
-
       gutil.log(gutil.colors.green('Launch browserify bundler for: ' + taskName));
       var bundler = getBundler(item.scripts.index);
 

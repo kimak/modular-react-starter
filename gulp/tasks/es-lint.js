@@ -1,29 +1,25 @@
-'use strict';
-
-import gulp from 'gulp';
-import gutil from 'gulp-util';
-import eslint from 'gulp-eslint';
-import print from 'gulp-print';
-import path from 'path';
-import _ from 'lodash';
-import merge from 'merge-stream';
-import minimist from 'minimist';
-
+import gulp         from 'gulp';
+import gutil        from 'gulp-util';
+import eslint       from 'gulp-eslint';
+import print        from 'gulp-print';
+import path         from 'path';
+import _            from 'lodash';
+import merge        from 'merge-stream';
+import minimist     from 'minimist';
 import handleErrors from '../utils/handleErrors';
-import basePaths from '../config/basePaths';
-import config from '../config/config';
+import basePaths    from '../config/basePaths';
+import config       from '../config/config';
 
 
 gulp.task('es-lint',() => {
-
   gutil.log(gutil.colors.green('Launch ES linting'));
 
   var sources = [];
 
   _.forEach(config.modules, (item, key) => {
-
     if (!item.scripts || !item.scripts.src) {
       gutil.log(gutil.colors.yellow('--Skipping eslint task for: ' + key));
+
       return;
     }
 
@@ -42,5 +38,4 @@ gulp.task('es-lint',() => {
     .pipe(eslint("./.eslintrc"))
     .pipe(eslint.format())
     .pipe(eslint.failOnError());
-
 });

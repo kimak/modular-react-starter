@@ -1,6 +1,4 @@
-'use strict';
-
-var gulp = require('gulp');
+import gulp from 'gulp';
 
 require('./../tasks/unit-test');
 require('./../tasks/scss-lint');
