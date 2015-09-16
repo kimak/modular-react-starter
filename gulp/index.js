@@ -1,5 +1,3 @@
-"use strict";
-
 import fs from 'fs';
 import onlyScripts from './utils/scriptFilter';
 import gulp from 'gulp';
@@ -10,7 +8,6 @@ function autoLoadTasks(root, folder) {
   tasks.forEach(function (task) {
     require('./' + folder + task);
   });
-
 }
 
 autoLoadTasks("./gulp/", "tasks/");

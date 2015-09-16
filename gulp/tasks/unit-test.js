@@ -1,20 +1,18 @@
-'use strict';
-
-import gulp from 'gulp';
-import gutil from 'gulp-util';
-import path from 'path';
-import jestcli from 'jest-cli';
-import _ from 'lodash';
-import util from 'util';
-import fileset from 'file-set';
+import gulp      from 'gulp';
+import gutil     from 'gulp-util';
+import path      from 'path';
+import jestcli   from 'jest-cli';
+import _         from 'lodash';
+import util      from 'util';
+import fileset   from 'file-set';
+import basePaths from '../config/basePaths';
+import config    from '../config/config';
 // fix the "Please run node with the --harmony flag!" error
 // cf https://github.com/Dakuan/gulp-jest/issues/9
 //require('harmonize')(;
-import basePaths from '../config/basePaths';
-import config from '../config/config';
+
 
 gulp.task('unit-test', (done) => {
-
   gutil.log(gutil.colors.green('Launch unit tests'));
 
   var testRootPatterns = [];
@@ -23,9 +21,9 @@ gulp.task('unit-test', (done) => {
   ];
 
   _.forEach(config.modules, (item, key) => {
-
     if (!item.scripts || !item.scripts.root) {
       gutil.log(gutil.colors.yellow('--Skipping jest task for: ' + key));
+
       return;
     }
 
@@ -41,7 +39,6 @@ gulp.task('unit-test', (done) => {
   });
 
   dependenciesPatterns = _.uniq(dependenciesPatterns);
-
 
   var ls = fileset(testRootPatterns);
   var testRoots = _.uniq(ls.dirs);
@@ -80,11 +77,9 @@ gulp.task('unit-test', (done) => {
 
       return done(error);
     }
+
     return done();
   }
 
   return jestcli.runCLI({config: options}, options.rootDir, onComplete);
-
-
 });
-

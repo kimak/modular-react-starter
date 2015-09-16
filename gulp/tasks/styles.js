@@ -1,19 +1,16 @@
-'use strict';
-
-import gulp from 'gulp';
-import changed from 'gulp-changed';
-import sass from 'gulp-sass';
-import minifyCSS from 'gulp-minify-css';
+import gulp         from 'gulp';
+import changed      from 'gulp-changed';
+import sass         from 'gulp-sass';
+import minifyCSS    from 'gulp-minify-css';
 import autoprefixer from 'gulp-autoprefixer';
-import print from 'gulp-print';
-import _ from 'lodash';
-import gutil from 'gulp-util';
-import rename from 'gulp-rename';
-import sourcemaps from 'gulp-sourcemaps';
-import gulpif from 'gulp-if';
-
+import print        from 'gulp-print';
+import _            from 'lodash';
+import gutil        from 'gulp-util';
+import rename       from 'gulp-rename';
+import sourcemaps   from 'gulp-sourcemaps';
+import gulpif       from 'gulp-if';
 import handleErrors from '../utils/handleErrors';
-import config from '../config/config';
+import config       from '../config/config';
 
 
 function getStyleTasks() {
@@ -24,6 +21,7 @@ function getStyleTasks() {
 
     if (!item.styles || !item.styles.index || !item.styles.dest) {
       gutil.log(gutil.colors.yellow('--Skipping styles task for: ' + key));
+
       return;
     }
 
@@ -49,18 +47,14 @@ function getStyleTasks() {
         .pipe(gulpif(!isDev, rename({suffix: '.min'})))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(item.styles.dest));
-
     });
 
     tasks.push(taskName);
   });
 
   return tasks;
-
-
 }
 
 gulp.task('styles', () => {
   return gulp.start(getStyleTasks());
 });
-

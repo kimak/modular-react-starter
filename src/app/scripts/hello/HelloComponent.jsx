@@ -1,19 +1,23 @@
-'use strict';
+import React, { Component } from 'react';
 
-var React = require('react');
 
-var HelloComponent = React.createClass({
-  propTypes: {
+class HelloComponent extends Component {
+    render() {
+        let { title } = this.props;
+
+        return (
+            <h2>{title}</h2>
+        );
+    }
+}
+
+HelloComponent.defaultProps = {
+    title: 'Hello World'
+}
+
+HelloComponent.propTypes = {
     title: React.PropTypes.string
-  },
-  render: function () {
-
-    return (
-      <h2>{this.props.title}</h2>
-    );
-  }
-});
+};
 
 
-
-module.exports = HelloComponent;
+export default HelloComponent;

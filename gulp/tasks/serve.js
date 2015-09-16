@@ -1,8 +1,6 @@
-'use strict';
-
-import gulp from 'gulp';
+import gulp        from 'gulp';
 import browserSync from 'browser-sync';
-import basePaths from '../config/basePaths';
+import basePaths   from '../config/basePaths';
 
 gulp.task('serve', () => {
   return browserSync({

@@ -1,7 +1,6 @@
-'use strict';
+import path      from 'path';
+import basePaths from './basePaths';
 
-var path = require('path');
-var basePaths = require('./basePaths');
 
 var config = {
 
@@ -27,8 +26,7 @@ var config = {
         list: ['react', 'react-router', 'reflux'],
         dest: basePaths.dest + '/vendor'
     }
-
 };
 
-module.exports = config;
 
+export default config;
